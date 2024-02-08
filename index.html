@@ -59,7 +59,7 @@
       >
         <div class="container">
           <section class="secs" id="one">
-            <div class="input-group">
+            <div class="input-group search-product">
               <input
                 type="text"
                 class="form-control"
@@ -157,7 +157,71 @@
             </div>
           </section>
 
-          <section class="secs" id="two">two</section>
+          <section class="secs" id="two">
+    <form class="row g-3 needs-validation was-validated" novalidate="">
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Product Name</label>
+        <input type="text" class="form-control" id="validationCustom01" value="Mark" required="">
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="validationCustom02" class="form-label">Dealer Name</label>
+        <input type="text" class="form-control" id="validationCustom02" value="Otto" required="">
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="validationCustomUsername" class="form-label">Price</label>
+        <div class="input-group has-validation">
+
+          <input type="number" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required="">
+          <div class="invalid-feedback">
+            Please choose a username.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">City</label>
+        <input type="text" class="form-control" id="validationCustom03" required="">
+        <div class="invalid-feedback">
+          Please provide a valid city.
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label for="validationCustom04" class="form-label">State</label>
+        <select class="form-select" id="validationCustom04" required="">
+          <option selected="" disabled="" value="">Choose...</option>
+          <option>...</option>
+        </select>
+        <div class="invalid-feedback">
+          Please select a valid state.
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label for="validationCustom05" class="form-label">Zip</label>
+        <input type="text" class="form-control" id="validationCustom05" required="">
+        <div class="invalid-feedback">
+          Please provide a valid zip.
+        </div>
+      </div>
+   
+   <!-- Large button groups (default and split) -->
+
+   <div class="d-flex col-">
+    <div class="dropdown me-1">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
+        choose 
+      </button>
+      <ul class="dropdown-menu">
+        <li><button class="dropdown-item" type="button" id="add-btn">Add</button></li>
+        <li><button class="dropdown-item" type="button" id="delete-btn">Delete</button></li>
+      </ul>
+    </div>
+
+  </div></section>
           <section class="secs" id="three">three</section>
           <section class="secs" id="four">four</section>
         </div>
@@ -168,5 +232,34 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+
+
+
+    <!-- initialize the database -->
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAIVyeovwQAeXX4gGEBBgYtYvFLOdP-ekU",
+    authDomain: "ingrain-dealers.firebaseapp.com",
+    projectId: "ingrain-dealers",
+    storageBucket: "ingrain-dealers.appspot.com",
+    messagingSenderId: "697703950409",
+    appId: "1:697703950409:web:414c2e2e09e4c31598f798",
+    measurementId: "G-74GCF0YYWP"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+<script src="app.js"></script>
+
   </body>
 </html>
