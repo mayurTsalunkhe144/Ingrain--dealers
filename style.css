@@ -25,3 +25,9 @@ body {
 .menu {
   z-index: 10000;
 }
+
+.add-dealer {
+  margin-top: 50px;
+  padding: 2%;
+  margin-bottom: 50px;
+}

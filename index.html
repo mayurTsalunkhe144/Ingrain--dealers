@@ -11,6 +11,9 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="company.js" type="module"></script>
+    <script src="Products.js" type="module"></script>
+    <script src="firebase-modules.js" type="module"></script>
   </head>
   <body>
     <header>
@@ -85,6 +88,7 @@
                         data-bs-toggle="offcanvas"
                         data-bs-target="#addproduct"
                         aria-controls="staticBackdrop"
+                        id="add-product-nav"
                       >
                         Add Product
                       </button>
@@ -138,6 +142,8 @@
             id="search-btn"
             type="button"
             class="btn btn-outline-secondary"
+            data-bs-target="#add-dealer-to-list"
+            data-bs-toggle="modal"
           >
             Search
           </button>
@@ -222,7 +228,7 @@
       aria-labelledby="staticBackdropLabel"
     >
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="staticBackdropLabel">Add product</h5>
+        <h5 class="offcanvas-title" id="staticBackdropLabel">Add Dealer</h5>
         <button
           type="button"
           class="btn-close"
@@ -233,32 +239,48 @@
       <div class="offcanvas-body">
         <div>
           <form class="row g-3">
-            <div class="col-md-4">
+            <div class="col-md-12">
               <label for="validationDefault01" class="form-label"
                 >Dealer Name</label
               >
               <input
                 type="text"
                 class="form-control"
-                id="dealername"
-                value="Dealer"
-                required
+                id="dealer-name"
+                aria-required="true"
               />
             </div>
-            <div class="col-md-4">
-              <label for="validationDefault02" class="form-label">Price</label>
+            <div class="col-md-12">
+              <label
+                for="validationDefault02"
+                class="form-label"
+                aria-required="true"
+                >Phone</label
+              >
               <input
-                type="number"
+                type="tel"
                 class="form-control"
-                id="price"
-                value="0.00"
+                id="dealer-Phone"
+                value=""
                 required
               />
             </div>
-            <label for="validationDefaultUsername" class="form-label"
-              >Address</label
-            >
-            <div class="col-md-4">
+            <div class="col-md-12">
+              <label for="validationDefault02" class="form-label">GSTIN</label>
+              <input
+                type="Text"
+                class="form-control"
+                id="dealer-GSTIN"
+                value=""
+                required
+              />
+            </div>
+            <div class="col-md-12">
+              <label for="validationDefaultUsername" class="form-label"
+                >Address</label
+              >
+            </div>
+            <div class="col-md-12">
               <label for="validationDefaultUsername" class="form-label"
                 >city</label
               >
@@ -266,34 +288,42 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="city"
+                  id="dealer-city"
+                  value="Pune"
                   aria-describedby="inputGroupPrepend2"
-                  required
                 />
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
               <label for="validationDefault03" class="form-label">street</label>
-              <input type="text" class="form-control" id="street" required />
+              <input type="text" class="form-control" id="dealer-street" />
             </div>
-            <div class="col-md-3">
+            <div class="col-md-12">
               <label for="validationDefault04" class="form-label">State</label>
-              <select class="form-select" id="validationDefault04" required>
-                <option selected disabled value="">Choose...</option>
-                <option>...</option>
-              </select>
+              <input
+                type="text"
+                class="form-control"
+                id="dealer-state"
+                value="Maharashtra"
+              />
             </div>
-            <div class="col-md-3">
+            <div class="col-md-12">
               <label for="validationDefault05" class="form-label">Zip</label>
               <input
                 type="text"
                 class="form-control"
-                id="validationDefault05"
+                id="dealer-zip"
                 required
               />
             </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="button">save</button>
+              <button
+                class="btn btn-primary"
+                id="save-dealer-btn"
+                type="button"
+              >
+                save
+              </button>
             </div>
           </form>
         </div>
@@ -309,7 +339,7 @@
       style="z-index: 10000"
     >
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="staticBackdropLabel">add product</h5>
+        <h5 class="offcanvas-title" id="staticBackdropLabel">Add product</h5>
         <button
           type="button"
           class="btn-close"
@@ -328,26 +358,82 @@
                 type="text"
                 class="form-control"
                 id="exampleInputEmail1"
-                aria-describedby="emailHelp"
+                aria-describedby="product help"
               />
               <div id="emailHelp" class="form-text">product name</div>
             </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label"
-                >Dealer</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="exampleInputPassword1"
-              />
+            <div class="border border-primary border-2 add-dealer rounded">
+              <select
+                class="form-select"
+                size="10"
+                aria-label="Size 3 select example"
+                id="select-dealer"
+              ></select>
             </div>
-            <label class="form-check-label" for="exampleCheck1">price</label>
-            <div class="mb-3">
-              <input type="text" class="form-control" id="exampleCheck1" />
-            </div>
-            <button type="button" class="btn btn-primary">Submit</button>
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#add-price"
+              data-bs-whatever="company 1"
+            >
+              Submit
+            </button>
           </form>
+        </div>
+      </div>
+    </div>
+    <!-- modals -->
+
+    <div
+      class="modal fade"
+      id="add-price"
+      tabindex="-1"
+      aria-hidden="true"
+      style="display: none; z-index: 10000"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Add Dealer</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"
+                  >Dealer</label
+                >
+                <input type="text" class="form-control" id="recipient-name" />
+              </div>
+              <div class="mb-3">
+                <label for="price" class="col-form-label">price</label>
+                <input type="number" value="0.00" class="form-control" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="add-dealer-modal-btn"
+            >
+              Add
+            </button>
+          </div>
         </div>
       </div>
     </div>
