@@ -11,6 +11,8 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
+
+    <script src="app.js" type="module"></script>
     <script src="company.js" type="module"></script>
     <script src="Products.js" type="module"></script>
     <script src="firebase-modules.js" type="module"></script>
@@ -127,81 +129,29 @@
       tabindex="0"
     ></div>
     <section class="secs home" id="home">
-      <div class="row">
-        <div
-          class="input-group col-lg-12 col-md-12 col-sm-12"
-          style="margin-bottom: 50px"
+      <label for="validationDefaultUsername" class="form-label"
+        >Search Product
+      </label>
+      <div class="input-group mb-3">
+        <select
+          class="form-select"
+          id="select-product"
+          onfocus="this.size=3;"
+          onblur="this.size=1;"
+          onchange="this.size=1; this.blur();"
+          aria-placeholder="Choose a category"
+        ></select>
+        <button
+          class="input-group-text"
+          for="inputGroupSelect02"
+          id="search-btn"
         >
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Text input with segmented dropdown button"
-            placeholder="Search"
-          />
-          <button
-            id="search-btn"
-            type="button"
-            class="btn btn-outline-secondary"
-            data-bs-target="#add-dealer-to-list"
-            data-bs-toggle="modal"
-          >
-            Search
-          </button>
-          <button
-            type="button"
-            class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <span class="visually-hidden"></span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-              <button class="dropdown-item" type="button" id="productMode-btn">
-                Product
-              </button>
-            </li>
-            <li>
-              <button class="dropdown-item" type="button" id="DealerMode-btn">
-                Dealer
-              </button>
-            </li>
-            <!-- <li><a class="dropdown-item" href="#">Something else here</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Separated link</a></li> -->
-          </ul>
-        </div>
+          Search
+        </button>
       </div>
-      <div class="accordion" id="accordionExample">
-        <div class="accordion-item col-12">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-              aria-expanded="true"
-              aria-controls="collapseOne"
-            >
-              Accordion Item #1
-            </button>
-          </h2>
-          <div
-            id="collapseOne"
-            class="accordion-collapse collapse show"
-            data-bs-parent="#accordionExample"
-          >
-            <div class="accordion-body">
-              <strong>This is the first item's accordion body.</strong> It is
-              shown by default, until the collapse plugin adds the appropriate
-              classes that we use to style each element. These classes control
-              the overall appearance, as well as the showing and hiding via CSS
-              transitions. You can modify any of this with custom CSS or
-              overriding our default variables. It's also worth noting that just
-              about any HTML can go within the <code>.accordion-body</code>,
-              though the transition does limit overflow.
-            </div>
-          </div>
+      <div id="data-list" class="data-list">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="show-data">
+          <!-- searched data will be here -->
         </div>
       </div>
     </section>
@@ -321,6 +271,7 @@
                 class="btn btn-primary"
                 id="save-dealer-btn"
                 type="button"
+                data-bs-dismiss="offcanvas"
               >
                 save
               </button>
@@ -357,18 +308,11 @@
               <input
                 type="text"
                 class="form-control"
-                id="exampleInputEmail1"
+                id="product-name"
                 aria-describedby="product help"
+                required
               />
               <div id="emailHelp" class="form-text">product name</div>
-            </div>
-            <div class="border border-primary border-2 add-dealer rounded">
-              <select
-                class="form-select"
-                size="10"
-                aria-label="Size 3 select example"
-                id="select-dealer"
-              ></select>
             </div>
 
             <button
@@ -377,9 +321,30 @@
               data-bs-toggle="modal"
               data-bs-target="#add-price"
               data-bs-whatever="company 1"
+              id="add-dealer-list"
             >
-              Submit
+              Add
             </button>
+
+            <div class="border border-primary border-2 add-dealer rounded">
+              <select
+                data-bs-target="modal"
+                data-bs-toggle="#add-price"
+                class="form-select"
+                size="10"
+                aria-label="Size 3 select example"
+                id="save-dealer"
+              ></select>
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-bs-dismiss="offcanvas"
+                id="save-dealer-list"
+              >
+                save
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -406,15 +371,26 @@
           </div>
           <div class="modal-body">
             <form>
+              <select
+                class="form-select form-select-lg mb-3"
+                aria-label=".form-select-lg example"
+                onfocus="this.size=5;"
+                onblur="this.size=1;"
+                onchange="this.size=1; this.blur();"
+                id="modal-select-dealer"
+              >
+                <!-- options will be added here -->
+              </select>
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label"
-                  >Dealer</label
+                <label for="price" class="col-form-label" id="price"
+                  >price</label
                 >
-                <input type="text" class="form-control" id="recipient-name" />
-              </div>
-              <div class="mb-3">
-                <label for="price" class="col-form-label">price</label>
-                <input type="number" value="0.00" class="form-control" />
+                <input
+                  type="number"
+                  value="0.00"
+                  class="form-control"
+                  id="dealer-price-modal"
+                />
               </div>
             </form>
           </div>

@@ -8,6 +8,36 @@ const company = {
     state: "",
     zip: "",
   },
+  setDealer: function (
+    dealerName,
+    dealerPhone,
+    dealerGSTIN,
+    city,
+    street,
+    state,
+    zip
+  ) {
+    this.name = dealerName;
+    this.phone = dealerPhone;
+    this.GSTIN = dealerGSTIN;
+    this.address = {
+      city: city,
+      street: street,
+      state: state,
+      zip: zip,
+    };
+  },
+  getDealer: function () {
+    return {
+      name: this.name,
+      phone: this.phone,
+      GSTIN: this.GSTIN,
+      street: this.address.street,
+      city: this.address.city,
+      state: this.address.state,
+      zip: this.address.zip,
+    };
+  },
 };
 function addCompanyDetails(dealer) {
   dealer.name = document.querySelector("#dealer-name").value;

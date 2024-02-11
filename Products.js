@@ -1,13 +1,20 @@
-const product = {
+let product = {
   dealers: {},
   name: "",
+  getProduct: function () {
+    return {
+      name: this.name,
+      dealers: this.dealers,
+    };
+  },
+  addDealer: function (dealerName, dealerPrice) {
+    this.dealers[dealerName] = dealerPrice;
+  },
 };
-export function add_comp(comp_name, price) {
-  product.dealers.comp_name = price;
-}
 
 const del_comp = (comp_name) => {
   delete product.comp_name;
+  return `The ${comp_name} component has been deleted.`;
 };
 
-export { del_comp, product };
+export { product };
